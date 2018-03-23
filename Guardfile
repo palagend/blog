@@ -22,6 +22,9 @@ guard :minitest, spring: 'bin/rails test', all_on_start: false do
   watch('app/helpers/sessions_helper.rb') do
     integration_tests << 'test/helpers/sessions_helper_test.rb'
   end
+  watch('app/helpers/application_helper.rb') do
+    helper_test
+  end
   watch('app/controllers/sessions_controller.rb') do
     ['test/controllers/sessions_controller_test.rb',
      'test/integration/users_login_test.rb']
@@ -52,4 +55,9 @@ end
 # Returns all tests for the given resource.
 def resource_tests(resource)
   integration_tests(resource) << controller_test(resource)
+end
+
+# Returns all helper tests corresponding to the given resoure.
+def helper_test(resource)
+  "test/helpers/#{resource}_helper_test.rb"
 end
