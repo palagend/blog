@@ -8,12 +8,14 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
     if params[:user][:password] != params[:user][:password_confirmation]
-      render plain: "password is not in consistency"
+      flash[:danger] = '密码不一致'
+      render 'new'
       return
     end
-    @user = User.new(user_params)
     if @user.save
+      flash[:success] = 'Welcome to the Sample App!'
       redirect_to @user
     else
       render 'new'
