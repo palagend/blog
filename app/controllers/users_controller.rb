@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.email = @user.email.downcase
     if params[:user][:password] != params[:user][:password_confirmation]
       flash[:danger] = '密码不一致'
       render 'new'
