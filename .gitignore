@@ -24,3 +24,4 @@ config/secrets.yml.key
 # Ignore Spring files.
 /spring/*.pid
 /public/assets/
+.idea/
