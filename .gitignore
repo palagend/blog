@@ -25,3 +25,5 @@ config/secrets.yml.key
 /spring/*.pid
 /public/assets/
 .idea/
+\#
+*.swp
