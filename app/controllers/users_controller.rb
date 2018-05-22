@@ -1,7 +1,8 @@
 # coding: utf-8
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :currect_user, only: [:edit, :update]
+  before_action :admin_user, only: [:destroy]
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -41,6 +42,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = 'User deleted'
+    redirect_to users_url
+  end
   private
 
   def user_params
@@ -58,5 +64,13 @@ class UsersController < ApplicationController
   def currect_user
     @user = User.find(params[:id])
     redirect_to root_url unless current_user?(@user)
+  end
+
+  # Confirms an admin user.
+  def admin_user
+    if !current_user.admin?
+      flash[:danger] = 'Forbidden'
+      reirect_to(root_url)
+    end
   end
 end
