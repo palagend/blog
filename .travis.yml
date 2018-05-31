@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+ - 2.3.3
+deploy:
+  provider: heroku
+  api_key:
+    secure: CY4rnUeL5FlhvVHojvg6WuCgc3zr0wWyvFW8FrTM62kbQaHXdpkoN/J5CwCoy0WejNmHdeiuHguKs54U22meK9+BnCx89bFdpnMFolWk6LN76b9z+7T2IUIvPfSa11LPsyIhI9mRMypugPM7wmjsYOjC43XgAx1K5IqUVkxBeDzXFESFMipnCfi8sqKUH4Vk1CZGsp5FgyudZqAzQaZQ3qLfDFl4lqkQ01U7nVqLZ5+ZsKDD/4KQhRkHIDvr8Az2G4kS6ao11KDbbY3Lwt2lNj4l5a3Y1wEGggwnuyF/mQzJ8br0AJTTXm23gskVNNzn95iAac3JAec3wZiA/L2wvCIY3iNTz8nratbgQNi7z6uZxEPIUe5bJgPn6znDpjTAdD91TtS1jk3YlgumjqTKHZDLBv63RCQdZk+5/jv8+C6W0Gpy6aIvPNcQOjkGz54ZFhdWJ4cdCgGIq7tsq2XJGLvt6aFrwyvy7aEEuNo8vilbYQPGiU/+uXOXxLVx6NHJ4JqCx46zXR9gG9YRyQS7oAFJWqYCfg454jWdAbVD2FPaKz6Tih0fxHx6IU+00HxId8sc4GQEjei8dY3q80nccBX4/faJAtGUiqZAoaurquoVi4V0uxShyBAeQDvy6PFei1tveOElEr4twaxe9OunCauRQLknIBBEzw3VvyhDRxM=
+  app:
+    master: palagend
+    account-activation: blog
+  on:
+    repo: palagend/blog
+    all_branches: true
+  run: "bin/rails db:migrate"
