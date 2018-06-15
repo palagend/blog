@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :currect_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
   def update
     @user = User.find(params[:id])
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
   end
 
   def create
@@ -34,9 +35,10 @@ class UsersController < ApplicationController
       return
     end
     if @user.save
-      log_in @user
-      flash[:success] = 'Welcome to the Sample App!'
-      redirect_to @user
+      @user.send_activation_email
+      UserMailer.account_activation(@user).deliver_later
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -70,7 +72,7 @@ class UsersController < ApplicationController
   def admin_user
     if !current_user.admin?
       flash[:danger] = 'Forbidden'
-      reirect_to(root_url)
+      redirect_to(root_url)
     end
   end
 end

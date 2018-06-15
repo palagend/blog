@@ -27,7 +27,19 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    user_name: 'palagend@sina.com',
+    password: 'knight4PRC',
+    address: 'smtp.sina.com',
+    authentication: :login
+  }
+  host = 'localhost:3000'
+  
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
   config.action_mailer.perform_caching = false
 
