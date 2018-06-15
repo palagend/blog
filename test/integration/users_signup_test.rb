@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
+  def setup
+    ActionMailer::Base.deliveries.clear
+  end
   test 'signup test' do
     get signup_path
     assert_no_difference 'User.count' do
@@ -15,7 +18,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     get signup_path
     assert_difference 'User.count', 1 do
       post users_path, params: { user: { name:  "Example User",
-                                         email: "user@example.com",
+                                         email: "palagend@sina.com",
                                          password:              "password",
                                          password_confirmation: "password" } }
     end
