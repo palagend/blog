@@ -1,20 +1,13 @@
 language: ruby
 rvm:
- - 2.3.4
+  - 2.3.4
 services:
   - postgresql
 before_script:
   - psql -c 'create database palagend;' -U postgres
   - psql -c "create user palagend superuser password 'dddddddd';" -U postgres
   - psql -c 'alter database palagend owner to palagend;' -U postgres
-
-# deploy:
-  # provider: heroku
-  # api_key:
-    # secure: CY4rnUeL5FlhvVHojvg6WuCgc3zr0wWyvFW8FrTM62kbQaHXdpkoN/J5CwCoy0WejNmHdeiuHguKs54U22meK9+BnCx89bFdpnMFolWk6LN76b9z+7T2IUIvPfSa11LPsyIhI9mRMypugPM7wmjsYOjC43XgAx1K5IqUVkxBeDzXFESFMipnCfi8sqKUH4Vk1CZGsp5FgyudZqAzQaZQ3qLfDFl4lqkQ01U7nVqLZ5+ZsKDD/4KQhRkHIDvr8Az2G4kS6ao11KDbbY3Lwt2lNj4l5a3Y1wEGggwnuyF/mQzJ8br0AJTTXm23gskVNNzn95iAac3JAec3wZiA/L2wvCIY3iNTz8nratbgQNi7z6uZxEPIUe5bJgPn6znDpjTAdD91TtS1jk3YlgumjqTKHZDLBv63RCQdZk+5/jv8+C6W0Gpy6aIvPNcQOjkGz54ZFhdWJ4cdCgGIq7tsq2XJGLvt6aFrwyvy7aEEuNo8vilbYQPGiU/+uXOXxLVx6NHJ4JqCx46zXR9gG9YRyQS7oAFJWqYCfg454jWdAbVD2FPaKz6Tih0fxHx6IU+00HxId8sc4GQEjei8dY3q80nccBX4/faJAtGUiqZAoaurquoVi4V0uxShyBAeQDvy6PFei1tveOElEr4twaxe9OunCauRQLknIBBEzw3VvyhDRxM=
-  # app:
-    # master: palagend
-  # on:
-    # repo: palagend/blog
-    # all_branches: true
-  # run: "bin/rails db:migrate"
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZmLwmxcF3KALc3eIMaTna7Vhd0GjT/xJwcH9zirAF+qd7k06gEJbBEOieOhpETh4mpgcGhmCFxTdWI9a9ypSoeXhzFOwDLq0vGezwhoi83IDOahjaV99E6P5v5SHCXUft+MyVfrk6xtF/b4UQvHXPnlgsj4yN3l87KlRjyQTAvntc+3Hi6QneYxoj338/hjlxvRLo5RJ24C+ioc+80eWqIA+yWqNKX5dAQ5pRFIhCMC7QtQBdbsSC3Ka4Z9Spqk1ex5tYMKMwBDKI8msr/ok1Pf0vS0P5kmO0juEXLN7k/Bl8qqwrfdg+LWcwgOQbIWdehYRlPukyqS0wAu7XzgBZQ57JzTgow2GtmXkCmn72sRB6uKOLKScxhqmfH47gZMh6C9gtrtTolDLd6u0c5iiFG+lIPElqf6t0aAe26R/oVY1OSgID2Xxdeljciyq42xT2CsUnrhlrClXEeipot8xOQGdC+N8pybfTSbi9vZL8YELOiwYlziiiRFnY+NBrDel0aGuaAuLFCuzlLof65EOfYTyGHUvamPtt7tsqQ8V5siK/M+wbprdnrFOLFGKshU2n8g+/4uTidyIaA/952slwD72MeaOchyY9uycsT4FQfOqJHBExS8q1bz575iIcYRapWt9DEToEyY3nXK30jINmKSK7XDoAkmBWCw8EHEwiKM=
