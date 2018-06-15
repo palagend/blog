@@ -5,6 +5,7 @@ services:
   - postgresql
 before_script:
   - psql -c 'create user palagend superuser;' -U postgres
+  - psql -c 'create database palagend;' -U palagend
 deploy:
   provider: heroku
   api_key:
